@@ -2,6 +2,8 @@
 import time
 from itertools import product
 import numpy as np
+from scipy.optimize import linear_sum_assignment
+
 
 
 def print_log(message):
@@ -14,7 +16,7 @@ def print_log(message):
 
 def init_label_matrix(y):
     """
-    :param y: numpy array, shape = (n_nodes,)
+    :param y: numpy array, shape = (n_nodes,) -1 for the unlabeled data, 0,1,2.. for the labeled data
     :return:
     """
     y = y.reshape(-1)
@@ -98,5 +100,70 @@ def gather_patch_ft(x, patch_size):
     out = x[out_idx.reshape(-1)]    # MNkk x C
     out = out.reshape(x_row_num, x_col_num, -1) # M x N x kkC
     return out
+
+
+def calculate_clustering_accuracy(y_gnd, y_pred):
+    """
+    :param y_gnd:
+    :param y_pred:
+    :return:
+    """
+    y_pred = y_pred.reshape(-1)
+    y_gnd = y_gnd.reshape(-1)
+    
+    n_samples = y_gnd.shape[0]
+    n_class = np.unique(y_gnd).shape[0]
+    
+    M = np.zeros((n_class, n_class))
+
+    for i in range(n_samples):
+        r = y_gnd[i]
+        c = y_pred[i]
+        M[r, c] += 1
+
+    row_idx, col_idx = linear_sum_assignment(-M)
+
+    map = np.zeros((n_class, n_class))
+    map[row_idx, col_idx] = 1.
+
+    acc = np.sum(M * map) / n_samples
+
+    return acc
+
+
+def calculate_clustering_accuracy2(y_gnd, y_pred):
+    y_gnd = y_gnd.reshape(-1)
+    y_pred = y_pred.reshape(-1)
+
+    assert y_pred.shape[0] == y_gnd.shape[0]
+    
+    label_gnd = np.unique(y_gnd)
+    nclass_gnd = label_gnd.shape[0]
+    
+    label_pred = np.unique(y_pred)
+    nclass_pred =label_pred.shape[0]
+    
+    nclass = max(nclass_gnd, nclass_pred)
+    G = np.zeros((nclass, nclass))
+    
+    for i in range(nclass_gnd):
+        for j in range(nclass_pred):
+            G[i, j] = np.sum(((y_gnd == label_gnd[i]) & (y_pred == label_pred[j])))
+
+    row_idx, col_idx = linear_sum_assignment(-G)
+
+    new_y_pred = np.zeros_like(y_pred)
+    for i in range(nclass_pred):
+        new_y_pred[y_pred == label_pred[col_idx[i]]] = label_gnd[row_idx[i]]
+
+    acc = np.sum(y_gnd == new_y_pred) / y_gnd.shape[0]
+
+    return acc
+
+
+if __name__ == "__main__":
+    pass
+
+
 
 

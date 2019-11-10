@@ -126,6 +126,8 @@ def dyna_hg_trans_infer(hg, y, lbd, stepsize, beta, max_iter, hsl_iter, log=True
     A = sparse.diags(a)
     X = hg.node_features()
 
+    assert X is not None, "hg instance should be constructed with the parameter of 'with_feature=True'"
+
     F = _dhsl_update_f(hg, Y, A, lbd)
 
     for i_iter in range(max_iter):
@@ -251,7 +253,7 @@ def multi_hg_weighting_trans_infer(hg_list, y, lbd, mu, max_iter, log=True):
 def tensor_hg_trans_infer(X, y, lbd, alpha, gamma, stepsize, max_iter, hsl_iter, log=True):
     """ tensor-based (dynamic) hypergraph learning
     :param X: numpy array, shape = (n_nodes, n_features)
-    :param y: numpy array, shape = (n_nodes,)
+    :param y: numpy array, shape = (n_nodes,) -1 for the unlabeled data, 0,1,2.. for the labeled data
     :param lbd: float, the positive tradeoff parameter of empirical loss
     :param alpha: float,
     :param gamma: float,
@@ -370,6 +372,6 @@ def _dhsl_update_f(hg, Y, A, lbd):
 
     THETA = hg.theta_matrix()
     L = sparse.eye(n_nodes) - THETA
-    F = inv((A + 1 / lbd * L).toarray()).dot(A).dot(Y)
+    F = inv((A + 1 / lbd * L).toarray()).dot(A.dot(Y))
 
     return F

@@ -9,10 +9,10 @@ from cvxpy.error import SolverError
 from thumoon.base import HyperG
 from thumoon.utils import print_log
 
-# TODO: 1. elastic net hypergraph
+# TODO: 1. hyperedge weights , 2. elastic net hypergraph
 
 
-def gen_l1_hg(X, gamma, n_neighbors, log=True, with_feature=False):
+def gen_l1_hg(X, gamma, n_neighbors, log=False, with_feature=False):
     """
     :param X: numpy array, shape = (n_samples, n_features)
     :param gamma: float, the tradeoff parameter of the l1 norm on representation coefficients
@@ -21,6 +21,7 @@ def gen_l1_hg(X, gamma, n_neighbors, log=True, with_feature=False):
     :param with_feature: bool, optional(default=False)
     :return: instance of HyperG
     """
+    # TODO: np.argsort => np.argpartition
 
     assert n_neighbors >= 1.
     assert isinstance(X, np.ndarray)
@@ -51,7 +52,8 @@ def gen_l1_hg(X, gamma, n_neighbors, log=True, with_feature=False):
 
         # cvxpy
         x = cp.Variable(P.shape[0], nonneg=True)
-        objective = cp.Minimize(cp.norm(x@P-v, 2) + gamma * cp.norm(x, 1))
+        objective = cp.Minimize(cp.norm((P.T@x).T-v, 2) + gamma * cp.norm(x, 1))
+        # objective = cp.Minimize(cp.norm(x@P-v, 2) + gamma * cp.norm(x, 1))
         prob = cp.Problem(objective)
         try:
             prob.solve()

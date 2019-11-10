@@ -18,7 +18,7 @@ def main():
     y = np.concatenate([y_train, -1 * np.ones_like(y_test)])
 
     print_log("generating hypergraph")
-    hg = gen_knn_hg(X, n_neighbors=10, prob=0.5)
+    hg = gen_knn_hg(X, n_neighbors=10)
     print(hg)
 
     print_log("learning on hypergraph")

@@ -51,6 +51,10 @@ def load_modelnet(selected_mod=(0, 2)):
     X_train = [X_train[imod] for imod in selected_mod]
     X_test = [X_test[imod] for imod in selected_mod]
 
+    if len(selected_mod) == 1:
+        X_train = X_train[0]
+        X_test = X_test[0]
+
     return X_train, X_test, np.array(y_train), np.array(y_test)
 
 
@@ -72,3 +76,6 @@ def load_MSRGesture3D(i_train=2, i_test = 0):
 
     return X_train, X_test, y_train, y_test
 
+
+if __name__ == "__main__":
+    load_modelnet(selected_mod=(0,))

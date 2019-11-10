@@ -107,7 +107,7 @@ class HyperG:
         self._L = None
 
     def update_incident_matrix(self, H):
-        assert sparse.issparse(H) #TODO
+        assert sparse.issparse(H)
         assert H.ndim == 2
         assert H.shape[0] == self._n_nodes
         assert H.shape[1] == self._n_edges

@@ -12,7 +12,7 @@ def inductive_fit(hg, y, lbd, mu, eta, max_iter, log=True):
     3D Object Classification"
     (you should call the inductive_fit first and then
     call the inductive_predict to predict unlabeled instances)
-    :param hg: instance of HyperG,
+    :param hg: instance of HyperG or list
     :param y: numpy array, shape = (n_nodes,)
     :param lbd: float, the positive tradeoff parameter of empirical loss.
     :param mu: float, the positive tradeoff parameter of the regularizer on projection matrix.

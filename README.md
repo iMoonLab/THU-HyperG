@@ -3,7 +3,7 @@ THU-Moon
 
 Introduction
 ---
-libHyperG is a Python Toolbox for Hypergraph Learning.
+THU-Moon is a Python Toolbox for Hypergraph Learning.
 
 
 Installation
@@ -15,7 +15,7 @@ You can start with:
 Running Example
 ---
 
-    git clone https://github.com/xxxx/libHyperG.git
+    git clone https://github.com/iMoonLab/THU-Moon.git
     cd example
     python gesture_classification.py
 
