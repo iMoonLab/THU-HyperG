@@ -70,6 +70,10 @@ def inductive_fit(hg, y, lbd, mu, eta, max_iter, log=True):
     for hg_idx in range(n_hg):
         omega[hg_idx] = 1./n_hg + np.sum(loss)/(2*n_hg*eta) - loss[hg_idx]/(2*eta)
 
+    # TODO
+    if log:
+        print(omega)
+
     return IMHL(M, omega)
 
 

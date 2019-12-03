@@ -32,7 +32,7 @@ def trans_infer(hg, y, lbd):
     return predict_y
 
 
-def hyedge_weighting_trans_infer(hg, y, lbd, mu, max_iter=5, log=True):
+def hyedge_weighting_trans_infer(hg, y, lbd, mu, max_iter=15, log=True):
     """ hyperedge weighting from the "Visual-Textual Joint Relevance
     Learning for Tag-Based Social Image Search" paper
 
@@ -182,11 +182,12 @@ def multi_hg_trans_infer(hg_list, y, lbd):
     Y = init_label_matrix(y)
     n_nodes = Y.shape[0]
 
-    THETA = hg_list[0].theta_matrix()
-    for i in range(len(hg_list)-1):
+    THETA = np.zeros((n_nodes, n_nodes))
+    for i in range(len(hg_list)):
         THETA += hg_list[i].theta_matrix()
+
     L2 = sparse.eye(n_nodes) - (1 / (1 + lbd)) * THETA
-    F = (((lbd + 1) / lbd) * inv(L2.toarray())).dot(Y)
+    F = (((lbd + 1) / lbd) * inv(L2.A)).dot(Y)
 
     predict_y = F.argmax(axis=1).reshape(-1)[y == -1]
     return predict_y
@@ -250,7 +251,7 @@ def multi_hg_weighting_trans_infer(hg_list, y, lbd, mu, max_iter, log=True):
     return predict_y
 
 
-def tensor_hg_trans_infer(X, y, lbd, alpha, gamma, stepsize, max_iter, hsl_iter, log=True):
+def tensor_hg_trans_infer(X, y, lbd, alpha, gamma, stepsize, max_iter=50, hsl_iter=10, log=True, stop=True):
     """ tensor-based (dynamic) hypergraph learning
     :param X: numpy array, shape = (n_nodes, n_features)
     :param y: numpy array, shape = (n_nodes,) -1 for the unlabeled data, 0,1,2.. for the labeled data
@@ -261,6 +262,7 @@ def tensor_hg_trans_infer(X, y, lbd, alpha, gamma, stepsize, max_iter, hsl_iter,
     :param max_iter: int, maximum iteration times of alternative optimization
     :param hsl_iter: int, the number of iterations in the process of updating hypergraph tensor
     :param log: bool
+    :param stop: #TODO
     :return: numpy array, shape = (n_test, ), predicted labels of test instances
     """
     if log:
@@ -307,6 +309,9 @@ def tensor_hg_trans_infer(X, y, lbd, alpha, gamma, stepsize, max_iter, hsl_iter,
     T0 = T
     fH_value = []
 
+    loss = []
+    prev_F = None
+
     for i_iter in range(max_iter):
         FED = pairwise_distances(F)
         f = np.zeros((1, T.shape[1]))
@@ -349,9 +354,17 @@ def tensor_hg_trans_infer(X, y, lbd, alpha, gamma, stepsize, max_iter, hsl_iter,
         fh = (f @ T.T).reshape(-1)[0] + lbd * np.power(np.linalg.norm(F - Y, ord='fro'), 2.) + gamma * np.power(
             np.linalg.norm(T - T0, ord='fro'), 2)
         if log:
+            loss.append(fh)
             print_log("Iter: {}; loss:{:.5f}".format(i_iter, fh))
 
         fH_value.append(fh)
+
+        if stop:
+            if len(loss) >= 2 and loss[-1] > loss[-2]:
+                print_log("Stop at iteration :{}".format(i_iter))
+                F = prev_F
+                break
+            prev_F = F
 
     predict_y = np.argmax(F, axis=1).reshape(-1)[y == -1]
     return predict_y

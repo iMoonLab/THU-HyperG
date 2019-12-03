@@ -1,4 +1,4 @@
-THU-Moon
+THU-Moon: A Python Toolbox for Hypergraph Learning  
 ===
 
 Introduction
@@ -21,4 +21,4 @@ Running Example
 
 
 Citing
----
+--- 

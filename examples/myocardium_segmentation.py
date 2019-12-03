@@ -37,7 +37,7 @@ def main():
     # knn hg
     X_patch_ft = np.stack([gather_patch_ft(X[i][:, :, np.newaxis], (5, 5)) for i in range(X.shape[0])])
     knn_hg = gen_knn_hg(X_patch_ft.reshape(-1, X_patch_ft.shape[-1]), n_neighbors=7, prob=0.5)
-    # concat hg
+    # concatfeat hg
     concat_hg = concat_multi_hg([grid_hg, knn_hg])
 
     print_log("learning on hypergraph")
