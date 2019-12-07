@@ -131,35 +131,6 @@ def calculate_clustering_accuracy(y_gnd, y_pred):
     return acc
 
 
-def calculate_clustering_accuracy2(y_gnd, y_pred):
-    y_gnd = y_gnd.reshape(-1)
-    y_pred = y_pred.reshape(-1)
-
-    assert y_pred.shape[0] == y_gnd.shape[0]
-    
-    label_gnd = np.unique(y_gnd)
-    nclass_gnd = label_gnd.shape[0]
-    
-    label_pred = np.unique(y_pred)
-    nclass_pred =label_pred.shape[0]
-    
-    nclass = max(nclass_gnd, nclass_pred)
-    G = np.zeros((nclass, nclass))
-    
-    for i in range(nclass_gnd):
-        for j in range(nclass_pred):
-            G[i, j] = np.sum(((y_gnd == label_gnd[i]) & (y_pred == label_pred[j])))
-
-    row_idx, col_idx = linear_sum_assignment(-G)
-
-    new_y_pred = np.zeros_like(y_pred)
-    for i in range(nclass_pred):
-        new_y_pred[y_pred == label_pred[col_idx[i]]] = label_gnd[row_idx[i]]
-
-    acc = np.sum(y_gnd == new_y_pred) / y_gnd.shape[0]
-
-    return acc
-
 
 if __name__ == "__main__":
     pass
