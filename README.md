@@ -10,7 +10,7 @@ Hypergraph learning is mainly consisted of two procedures, hypergraph generation
 Specifically, it provides the following functionalities:
 * **Hypergraph generation methods**: knn based, epsilon ball based, clustering based, l1 representation based and grid based approaches.
 * **Learning on hypergraph methods**: transductive learning, inductive learning, diffusion and clustering methods.
-* **Utils**: some evaluation methods.
+* **Utils**: some preprocessing and evaluation methods.
 
 Installation
 ---
@@ -21,7 +21,6 @@ You can start with:
 or install from source
     
     git clone https://github.com/iMoonLab/THU-Moon.git
-    cd thumoon
     pip install .
 
 Running Example
