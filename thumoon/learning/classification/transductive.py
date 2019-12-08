@@ -132,7 +132,6 @@ def dyna_hg_trans_infer(hg, y, lbd, stepsize, beta, max_iter, hsl_iter, log=True
 
     for i_iter in range(max_iter):
         # update H
-        # need to remove the edges whose degrees are zero?
         C = (1 - beta) * F.dot(F.T) + beta * X.dot(X.T)
 
         for i_hsl in range(hsl_iter):
@@ -144,7 +143,6 @@ def dyna_hg_trans_infer(hg, y, lbd, stepsize, beta, max_iter, hsl_iter, log=True
             WDHD = W.dot(INVDE).dot(H.T).dot(DV2)
             DCD = sparse.dia_matrix.dot(DV2.dot(C), DV2)
 
-            # TODO CHECK
             term3 = 2 * sparse.coo_matrix.dot(DCD, H.dot(W).dot(INVDE))
 
             tmp = np.diag(sparse.coo_matrix.dot(H.T.dot(DCD), H)).reshape(1, -1)
@@ -262,7 +260,7 @@ def tensor_hg_trans_infer(X, y, lbd, alpha, gamma, stepsize, max_iter=50, hsl_it
     :param max_iter: int, maximum iteration times of alternative optimization
     :param hsl_iter: int, the number of iterations in the process of updating hypergraph tensor
     :param log: bool
-    :param stop: #TODO
+    :param stop: boolean,
     :return: numpy array, shape = (n_test, ), predicted labels of test instances
     """
     if log:
@@ -303,7 +301,7 @@ def tensor_hg_trans_infer(X, y, lbd, alpha, gamma, stepsize, max_iter=50, hsl_it
 
     S = S + S.T
     c = 1 / (1 + alpha)
-    # TODO np.sum
+
     F = np.linalg.inv(np.eye(n_nodes) + (2 * c / lbd) * (np.diag(np.sum(S, axis=0)) - S)) @ Y
 
     T0 = T
