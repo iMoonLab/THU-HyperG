@@ -9,16 +9,14 @@ from thumoon.utils import print_log
 # TODO: prob
 
 
-def gen_knn_hg(X, n_neighbors, is_prob=True, hyedge_weighting=False, with_feature=False):
+def gen_knn_hg(X, n_neighbors, is_prob=True, with_feature=False):
     """
     :param X: numpy array, shape = (n_samples, n_features)
     :param n_neighbors: int,
     :param is_prob: bool, optional(default=True)
-    :param hyedge_weighting:
     :param with_feature: bool, optional(default=False)
     :return: instance of HyperG
     """
-    # TODO: 1. check correctness
 
     assert isinstance(X, (np.ndarray, list))
     assert n_neighbors > 0
@@ -29,14 +27,12 @@ def gen_knn_hg(X, n_neighbors, is_prob=True, hyedge_weighting=False, with_featur
 
     m_dist = pairwise_distances(X)
 
-    m_neighbors = np.argpartition(m_dist, kth=n_neighbors+1, axis=1) # top n_neighbors+1
+    # top n_neighbors+1
+    m_neighbors = np.argpartition(m_dist, kth=n_neighbors+1, axis=1)
     m_neighbors_val = np.take_along_axis(m_dist, m_neighbors, axis=1)
 
     m_neighbors = m_neighbors[:, :n_neighbors+1]
     m_neighbors_val = m_neighbors_val[:, :n_neighbors+1]
-
-    # m_neighbors = np.argsort(m_dist)[:, 0:n_neighbors+1]
-    # m_neighbors_val = np.sort(m_dist)[:, 0:n_neighbors+1]
 
     # check
     for i in range(n_nodes):
@@ -57,12 +53,6 @@ def gen_knn_hg(X, n_neighbors, is_prob=True, hyedge_weighting=False, with_featur
     H = sparse.coo_matrix((values, (node_idx, edge_idx)), shape=(n_nodes, n_edges))
 
     w = np.ones(n_edges)
-    if hyedge_weighting:
-        for i_edge in range(n_edges):
-            idx = (edge_idx == i_edge).nonzero()
-
-            val = values[idx]
-            w[i_edge] = np.sum(val) - 1 # TODO: -1?
 
     if with_feature:
         return HyperG(H, w=w, X=X)
@@ -70,7 +60,7 @@ def gen_knn_hg(X, n_neighbors, is_prob=True, hyedge_weighting=False, with_featur
     return HyperG(H, w=w)
 
 
-def gen_epsilon_ball_hg(X, ratio, is_prob=True, hyedge_weighting=False, with_feature=False):
+def gen_epsilon_ball_hg(X, ratio, is_prob=True, with_feature=False):
     """
     :param X: numpy array, shape = (n_samples, n_features)
     :param ratio: float, the ratio of average distance to select neighbor
@@ -102,12 +92,6 @@ def gen_epsilon_ball_hg(X, ratio, is_prob=True, hyedge_weighting=False, with_fea
     H = sparse.coo_matrix((values, (node_idx, edge_idx)), shape=(n_nodes, n_edges))
 
     w = np.ones(n_edges)
-    if hyedge_weighting:
-        for i_edge in range(n_edges):
-            idx = (edge_idx == i_edge).nonzero()
-
-            val = values[idx]
-            w[i_edge] = np.sum(val) - 1 # TODO: -1?
 
     if with_feature:
         return HyperG(H, w=w, X=X)
