@@ -1,6 +1,6 @@
-numpy==1.16.2
-cvxpy==1.0.25
-matplotlib==3.0.3
-scipy==1.2.1
-SimpleITK==1.2.2
-scikit_learn==0.21.3
+numpy
+cvxpy>=1.0
+matplotlib
+scipy
+SimpleITK
+scikit_learn
