@@ -13,7 +13,8 @@ def gen_grid_neigh_hg(input_size):
     input_size = np.array(input_size).reshape(-1)
     assert input_size.shape[0] == 2
 
-    h, w = input_size # TODO
+    # TODO
+    h, w = input_size
     n_nodes = w * h
 
     node_set = np.arange(n_nodes)

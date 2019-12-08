@@ -6,8 +6,6 @@ import scipy.sparse as sparse
 from thumoon.base import HyperG
 from thumoon.utils import print_log
 
-# TODO: prob
-
 
 def gen_knn_hg(X, n_neighbors, is_prob=True, with_feature=False):
     """

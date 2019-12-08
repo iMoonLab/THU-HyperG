@@ -9,7 +9,7 @@ from cvxpy.error import SolverError
 from thumoon.base import HyperG
 from thumoon.utils import print_log
 
-# TODO: 1. hyperedge weights , 2. elastic net hypergraph
+# TODO: 1. elastic net hypergraph
 
 
 def gen_l1_hg(X, gamma, n_neighbors, log=False, with_feature=False):
@@ -21,7 +21,6 @@ def gen_l1_hg(X, gamma, n_neighbors, log=False, with_feature=False):
     :param with_feature: bool, optional(default=False)
     :return: instance of HyperG
     """
-    # TODO: np.argsort => np.argpartition
 
     assert n_neighbors >= 1.
     assert isinstance(X, np.ndarray)
