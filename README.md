@@ -26,7 +26,6 @@ or install from source
 Examples
 ---
 
-We provide some [examples](https://github.com/hjlin0515/THU-Moon/tree/master/examples) in the examples/ directory about how to apply this toolbox to the tasks like classification and segmentation.  
 
 Citing
 --- 

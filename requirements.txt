@@ -2,5 +2,4 @@ numpy
 cvxpy>=1.0
 matplotlib
 scipy
-SimpleITK
 scikit_learn
