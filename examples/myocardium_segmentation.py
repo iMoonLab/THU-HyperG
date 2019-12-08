@@ -26,7 +26,6 @@ def postprocess(ary):
 def main():
     print_log("loading data")
     X_train, X_test, y_train, y_test = load_myocardium([3])
-    print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
     X = np.concatenate([X_train, X_test], axis=0)
     y = np.concatenate([y_train.reshape(-1), -1 * np.ones_like(y_test).reshape(-1)])
 
@@ -36,7 +35,7 @@ def main():
     grid_hg = fuse_mutli_sub_hg(grid_hg_s)
     # knn hg
     X_patch_ft = np.stack([gather_patch_ft(X[i][:, :, np.newaxis], (5, 5)) for i in range(X.shape[0])])
-    knn_hg = gen_knn_hg(X_patch_ft.reshape(-1, X_patch_ft.shape[-1]), n_neighbors=7, prob=0.5)
+    knn_hg = gen_knn_hg(X_patch_ft.reshape(-1, X_patch_ft.shape[-1]), n_neighbors=7)
     # concatfeat hg
     concat_hg = concat_multi_hg([grid_hg, knn_hg])
 

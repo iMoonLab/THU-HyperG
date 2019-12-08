@@ -11,7 +11,7 @@ from examples.data_helper import load_modelnet
 
 def main():
     print_log("loading data")
-    X_train, X_test, y_train, y_test = load_modelnet()
+    X_train, X_test, y_train, y_test = load_modelnet(selected_mod=(0, 1))
 
     X = [np.vstack((X_train[imod], X_test[imod])) for imod in range(len(X_train))]
     y = np.concatenate((y_train, -1 * np.ones_like(y_test)))

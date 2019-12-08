@@ -7,6 +7,7 @@ import SimpleITK as sitk
 from sklearn.preprocessing import normalize
 
 from thumoon.utils import minmax_scale
+from thumoon.utils import print_log
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'datasets')
 
@@ -41,7 +42,7 @@ def load_myocardium(test_idx=[4]):
 
 
 def load_modelnet(selected_mod):
-    print("selected mod:{}".format(str(selected_mod)))
+    print_log("selected mod:{}".format(str(selected_mod)))
     modelnet40_dir = os.path.join(DATA_DIR, "modelnet40")
     X_train = pkl.load(open(os.path.join(modelnet40_dir, 'modelnet_train_fts.pkl'), 'rb'))
     X_test = pkl.load(open(os.path.join(modelnet40_dir, 'modelnet_test_fts.pkl'), 'rb'))
@@ -79,9 +80,4 @@ def load_MSRGesture3D(i_train=2, i_test = 0):
 
 
 if __name__ == "__main__":
-    data = load_modelnet(selected_mod=(0, 2))
-    print(data)
-
-    # for i in range(9):
-    #     X_train, X_test, y_train, y_test = load_MSRGesture3D(i_train=i, i_test=2)
-    #     print(np.sum(y_train==1))
+    pass

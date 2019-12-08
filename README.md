@@ -23,7 +23,7 @@ or install from source
     git clone https://github.com/iMoonLab/THU-Moon.git
     pip install .
 
-Running Example
+Examples
 ---
 
     git clone https://github.com/iMoonLab/THU-Moon.git
