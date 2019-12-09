@@ -1,6 +1,12 @@
 THU-Moon: A python toolbox for hypergraph learning  
 ===
 
+.. image:: 	https://img.shields.io/pypi/v/thumoon
+  :target: https://pypi.python.org/pypi/thumoon
+
+.. image:: 	https://img.shields.io/apm/l/thumoon
+  :target: https://github.com/hjlin0515/THU-Moon/blob/master/LICENSE
+
 Introduction
 ---
 **THU-Moon** is a python toolbox for hypergraph learning. Hypergraph is a generalization of graph, which is composed of a set of nodes and a set of hyperedges. Different from simple graph, in which each edge connect a pair of nodes, each hyperedge can connect any number of nodes in hypergraph. The flexible edge degree in hypergraph enables the hypergraph model to formulate the high-order correlation of data.

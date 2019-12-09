@@ -14,7 +14,7 @@ with open(os.path.join('requirements.txt'),encoding='utf-8') as f:
 setup(
     name="thumoon",
     version=__version__,
-    description='A Python Toolbox for Hypergraph Learning',
+    description='A python toolbox for hypergraph learning',
     author='Haojie Lin',
     author_email='linhj18@mails.tsinghua.edu.cn',
     install_requires=requirements,
