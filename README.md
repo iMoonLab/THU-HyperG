@@ -1,7 +1,13 @@
+[pypi-image]: https://img.shields.io/pypi/v/thumoon.svg
+[pypi-url]: https://pypi.python.org/pypi/thumoon
+[license-image]: https://img.shields.io/github/license/iMoonLab/THU-Moon
+[license-url]: https://github.com/iMoonLab/THU-Moon/blob/master/LICENSE
+
 THU-Moon: A python toolbox for hypergraph learning  
 ===
 
-[![PyPI Version][https://img.shields.io/pypi/v/thumoon.svg]][https://pypi.python.org/pypi/thumoon]
+[![PyPI Version][pypi-image]][pypi-url]
+[![LICENSE Version][license-image]][license-url]
 
 
 
