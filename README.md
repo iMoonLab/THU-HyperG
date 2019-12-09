@@ -1,11 +1,10 @@
 THU-Moon: A python toolbox for hypergraph learning  
 ===
 
-.. image:: 	https://img.shields.io/pypi/v/thumoon
-  :target: https://pypi.python.org/pypi/thumoon
+[![PyPI Version][https://img.shields.io/pypi/v/thumoon.svg]][https://pypi.python.org/pypi/thumoon]
 
-.. image:: 	https://img.shields.io/apm/l/thumoon
-  :target: https://github.com/hjlin0515/THU-Moon/blob/master/LICENSE
+
+
 
 Introduction
 ---
