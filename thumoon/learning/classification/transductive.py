@@ -135,19 +135,20 @@ def dyna_hg_trans_infer(hg, y, lbd, stepsize, beta, max_iter, hsl_iter, log=True
         C = (1 - beta) * F.dot(F.T) + beta * X.dot(X.T)
 
         for i_hsl in range(hsl_iter):
+            # sparse
             DV2 = hg.inv_square_node_degrees()
             INVDE = hg.inv_edge_degrees()
-            H = hg.incident_matrix()
             W = sparse.diags(hg.hyperedge_weights())
 
-            WDHD = W.dot(INVDE).dot(H.T).dot(DV2)
+            # dense
+            H = hg.incident_matrix()
+            WDHD = W.dot(INVDE).dot(H.T).dot(DV2).todense()
+            H = H.todense()
             DCD = sparse.dia_matrix.dot(DV2.dot(C), DV2)
 
-            term3 = 2 * sparse.coo_matrix.dot(DCD, H.dot(W).dot(INVDE))
-
-            tmp = np.diag(sparse.coo_matrix.dot(H.T.dot(DCD), H)).reshape(1, -1)
+            term3 = 2 * sparse.coo_matrix.dot(DCD.dot(H), W.dot(INVDE))
+            tmp = np.diag(H.T.dot(DCD).dot(H)).reshape(1, -1)
             term2 = - np.tile(sparse.csr_matrix.dot(tmp, W.dot(INVDE).dot(INVDE)), (n_nodes, 1))
-
             term1 = - DV2.dot(DV2).dot(DV2).dot(np.diag(H.dot(WDHD).dot(C)).reshape(-1, 1)).dot(
                 hg.hyperedge_weights().reshape(1, -1)
             )
