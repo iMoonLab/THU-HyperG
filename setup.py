@@ -1,15 +1,19 @@
 import os
 from setuptools import setup, find_packages
 
-
 # get __version__
 ver_file = os.path.join('thumoon', 'version.py')
 with open(ver_file) as f:
     exec(f.read())
 
 
-with open(os.path.join('requirements.txt'),encoding='utf-8') as f:
-    requirements = f.read().splitlines()
+install_requires = [
+    'numpy',
+    'cvxpy>=1.0',
+    'matplotlib',
+    'scipy',
+    'scikit_learn'
+    ]
 
 setup(
     name="thumoon",
@@ -18,11 +22,12 @@ setup(
     author='Haojie Lin',
     author_email='linhj18@mails.tsinghua.edu.cn',
     url='https://github.com/iMoonLab/THU-Moon',
-    install_requires=requirements,
+    install_requires=install_requires,
     packages=find_packages(exclude=['test']),
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
+
 )
