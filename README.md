@@ -32,6 +32,7 @@ You can start with:
 or install from source
     
     git clone https://github.com/iMoonLab/THU-Moon.git
+    cd THU-Moon
     pip install .
 
 Examples
