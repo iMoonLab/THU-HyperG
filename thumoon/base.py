@@ -1,4 +1,5 @@
 # coding=utf-8
+import time
 import scipy.sparse as sparse
 import numpy as np
 
@@ -84,8 +85,10 @@ class HyperG:
         if self._THETA is None:
             self.inv_square_node_degrees()
             self.inv_edge_degrees()
+
             W = sparse.diags(self.w)
             self._THETA = self._DV2.dot(self._H).dot(W).dot(self._INVDE).dot(self._H.T).dot(self._DV2)
+
         return self._THETA
 
     def laplacian(self):

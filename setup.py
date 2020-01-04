@@ -17,6 +17,7 @@ setup(
     description='A python toolbox for hypergraph learning',
     author='Haojie Lin',
     author_email='linhj18@mails.tsinghua.edu.cn',
+    url='https://github.com/iMoonLab/THU-Moon',
     install_requires=requirements,
     packages=find_packages(exclude=['test']),
     classifiers=[
