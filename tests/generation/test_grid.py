@@ -1,5 +1,5 @@
 import numpy as np
-from thumoon.generation import gen_grid_neigh_hg
+from hyperg.generation import gen_grid_neigh_hg
 
 
 def test_gen_grid_neigh_hg():

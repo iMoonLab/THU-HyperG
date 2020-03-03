@@ -1,6 +1,6 @@
 # coding=utf-8
 import numpy as np
-from thumoon.generation import gen_clustering_hg
+from hyperg.generation import gen_clustering_hg
 
 
 def test_gen_clus_hg():

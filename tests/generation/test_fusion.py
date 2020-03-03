@@ -1,5 +1,5 @@
 import numpy as np
-from thumoon.generation import concat_multi_hg, gen_knn_hg, gen_clustering_hg
+from hyperg.generation import concat_multi_hg, gen_knn_hg, gen_clustering_hg
 
 
 def test_fuse_multi_hg():

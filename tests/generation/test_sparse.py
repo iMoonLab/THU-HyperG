@@ -1,7 +1,7 @@
 # coding=utf-8
 import numpy as np
 
-from thumoon.generation import gen_l1_hg
+from hyperg.generation import gen_l1_hg
 
 
 def test_gen_l1_hg():

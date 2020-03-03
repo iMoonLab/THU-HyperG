@@ -2,7 +2,7 @@
 import numpy as np
 import scipy.sparse as sparse
 
-from thumoon.base import HyperG
+from hyperg.base import HyperG
 
 
 def gen_grid_neigh_hg(input_size):

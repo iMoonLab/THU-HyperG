@@ -4,8 +4,8 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import pairwise_distances
 import scipy.sparse as sparse
 
-from thumoon.base import HyperG
-from thumoon.utils import print_log
+from hyperg.base import HyperG
+from hyperg.utils import print_log
 
 
 def gen_clustering_hg(X, n_clusters, method="kmeans", with_feature=False, random_state=None):

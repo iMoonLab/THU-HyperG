@@ -3,9 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import SimpleITK as sitk
 
-from thumoon.generation import gen_knn_hg, gen_grid_neigh_hg, concat_multi_hg, fuse_mutli_sub_hg
-from thumoon.learning import trans_infer
-from thumoon.utils import iou_socre, gather_patch_ft, print_log
+from hyperg.generation import gen_knn_hg, gen_grid_neigh_hg, concat_multi_hg, fuse_mutli_sub_hg
+from hyperg.learning import trans_infer
+from hyperg.utils import iou_socre, gather_patch_ft, print_log
 
 from examples.data_helper import load_myocardium
 

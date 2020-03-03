@@ -1,7 +1,7 @@
 # coding=utf-8
 import numpy as np
 
-from thumoon.generation import gen_knn_hg, gen_epsilon_ball_hg
+from hyperg.generation import gen_knn_hg, gen_epsilon_ball_hg
 
 
 def test_gen_knn_hg():

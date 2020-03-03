@@ -8,8 +8,8 @@ from numpy.linalg import inv
 from itertools import combinations
 from sklearn.metrics import pairwise_distances
 
-from thumoon.base import HyperG
-from thumoon.utils import print_log, init_label_matrix, calculate_accuracy
+from hyperg.base import HyperG
+from hyperg.utils import print_log, init_label_matrix, calculate_accuracy
 
 
 def trans_infer(hg, y, lbd):
@@ -252,13 +252,13 @@ def multi_hg_weighting_trans_infer(hg_list, y, lbd, mu, max_iter, log=True):
     return predict_y
 
 
-def tensor_hg_trans_infer(X, y, lbd, alpha, gamma, stepsize, max_iter=50, hsl_iter=10, log=True, stop=True):
+def tensor_hg_trans_infer(X, y, lbd, alpha, mu, stepsize, max_iter=50, hsl_iter=10, log=True, stop=True):
     """ tensor-based (dynamic) hypergraph learning
     :param X: numpy array, shape = (n_nodes, n_features)
     :param y: numpy array, shape = (n_nodes,) -1 for the unlabeled data, 0,1,2.. for the labeled data
     :param lbd: float, the positive tradeoff parameter of empirical loss
     :param alpha: float,
-    :param gamma: float,
+    :param mu: float,
     :param stepsize: float
     :param max_iter: int, maximum iteration times of alternative optimization
     :param hsl_iter: int, the number of iterations in the process of updating hypergraph tensor
@@ -267,7 +267,7 @@ def tensor_hg_trans_infer(X, y, lbd, alpha, gamma, stepsize, max_iter=50, hsl_it
     :return: numpy array, shape = (n_test, ), predicted labels of test instances
     """
     if log:
-        print_log("parameters: lambda:{}\talpha:{}\tgamma:{}\tstepsize:{}".format(lbd, alpha, gamma, stepsize))
+        print_log("parameters: lambda:{}\talpha:{}\tmu:{}\tstepsize:{}".format(lbd, alpha, mu, stepsize))
 
     n_nodes = X.shape[0]
 
@@ -327,13 +327,13 @@ def tensor_hg_trans_infer(X, y, lbd, alpha, gamma, stepsize, max_iter=50, hsl_it
                 f_iter = f_iter + 1
 
         for iter2 in range(hsl_iter):
-            dfT = f + 2 * gamma * (T - T0)
+            dfT = f + 2 * mu * (T - T0)
             T = T - stepsize * dfT
             T[T < 0] = 0
             T[T > 1] = 1
 
         fH_value.append(
-            (f @ T.T).reshape(-1)[0] + lbd * np.power(np.linalg.norm(F - Y, ord='fro'), 2.) + gamma * np.power(
+            (f @ T.T).reshape(-1)[0] + lbd * np.power(np.linalg.norm(F - Y, ord='fro'), 2.) + mu * np.power(
                 np.linalg.norm(T - T0, ord='fro'), 2))
 
         S = np.zeros((n_nodes, n_nodes))
@@ -352,7 +352,7 @@ def tensor_hg_trans_infer(X, y, lbd, alpha, gamma, stepsize, max_iter=50, hsl_it
         c = 1 / (1 + alpha)
         F = np.linalg.inv(np.eye(n_nodes) + (2 * c / lbd) * (np.diag(np.sum(S, 0)) - S)) @ Y
 
-        fh = (f @ T.T).reshape(-1)[0] + lbd * np.power(np.linalg.norm(F - Y, ord='fro'), 2.) + gamma * np.power(
+        fh = (f @ T.T).reshape(-1)[0] + lbd * np.power(np.linalg.norm(F - Y, ord='fro'), 2.) + mu * np.power(
             np.linalg.norm(T - T0, ord='fro'), 2)
         if log:
             loss.append(fh)

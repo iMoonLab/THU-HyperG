@@ -2,9 +2,9 @@
 import numpy as np
 from sklearn.metrics import accuracy_score
 
-from thumoon.generation import gen_knn_hg
-from thumoon.learning import trans_infer
-from thumoon.utils import print_log
+from hyperg.generation import gen_knn_hg
+from hyperg.learning import trans_infer
+from hyperg.utils import print_log
 
 from examples.data_helper import load_MSRGesture3D
 

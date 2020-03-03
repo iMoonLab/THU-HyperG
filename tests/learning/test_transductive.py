@@ -1,8 +1,8 @@
 import numpy as np
 import scipy.sparse as sparse
 
-from thumoon.learning import *
-from thumoon.base import HyperG
+from hyperg.learning import *
+from hyperg.base import HyperG
 
 
 def test_trans_infer():

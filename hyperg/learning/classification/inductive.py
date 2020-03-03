@@ -2,8 +2,8 @@
 import numpy as np
 import scipy.sparse as sparse
 
-from thumoon.base import HyperG, IMHL
-from thumoon.utils import print_log, init_label_matrix, calculate_accuracy
+from hyperg.base import HyperG, IMHL
+from hyperg.utils import print_log, init_label_matrix, calculate_accuracy
 
 
 def inductive_fit(hg, y, lbd, mu, eta, max_iter, log=True):

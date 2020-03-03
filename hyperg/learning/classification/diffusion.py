@@ -2,8 +2,8 @@
 import numpy as np
 import scipy.sparse as sparse
 
-from thumoon.base import HyperG
-from thumoon.utils import print_log, init_label_matrix
+from hyperg.base import HyperG
+from hyperg.utils import print_log, init_label_matrix
 
 
 def cross_diffusion_infer(hg_list, y, iter, log=True):

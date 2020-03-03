@@ -3,8 +3,8 @@ import numpy as np
 from sklearn.metrics import pairwise_distances
 import scipy.sparse as sparse
 
-from thumoon.base import HyperG
-from thumoon.utils import print_log
+from hyperg.base import HyperG
+from hyperg.utils import print_log
 
 
 def gen_knn_hg(X, n_neighbors, is_prob=True, with_feature=False):

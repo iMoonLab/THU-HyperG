@@ -6,8 +6,8 @@ import scipy.io as scio
 import SimpleITK as sitk
 from sklearn.preprocessing import normalize
 
-from thumoon.utils import minmax_scale
-from thumoon.utils import print_log
+from hyperg.utils import minmax_scale
+from hyperg.utils import print_log
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'datasets')
 
