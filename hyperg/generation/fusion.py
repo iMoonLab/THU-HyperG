@@ -19,7 +19,7 @@ def concat_multi_hg(hg_list):
     X = None
     for hg in hg_list:
         if X is not None and hg.node_features() is not None:
-            assert X == hg.node_features()
+            assert (X == hg.node_features()).all()
         elif hg.node_features() is not None:
             X = hg.node_features()
 
