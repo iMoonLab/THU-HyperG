@@ -340,12 +340,10 @@ def tensor_hg_trans_infer(X, y, lbd, alpha, mu, stepsize, max_iter=50, hsl_iter=
         t_iter = 0
         for i in range(ceil_logn):
             for j in range(n_nodes):
-                if T[0, t_iter] == 0:
-                    continue
-
-                clique = [j] + neighbors[j, 0:i + 1].tolist()
-                indexs = np.array(list(combinations(clique, 2)))
-                S[indexs[:, 0], indexs[:, 1]] = S[indexs[:, 0], indexs[:, 1]] + T[0, t_iter] / delta_omega[0, t_iter]
+                if T[0, t_iter] != 0:
+                    clique = [j] + neighbors[j, 0:i + 1].tolist()
+                    indexs = np.array(list(combinations(clique, 2)))
+                    S[indexs[:, 0], indexs[:, 1]] = S[indexs[:, 0], indexs[:, 1]] + T[0, t_iter] / delta_omega[0, t_iter]
 
                 t_iter = t_iter + 1
         S = S + S.T
