@@ -7,6 +7,6 @@ from .version import __version__
 __all__ = [
     'generation',
     'learning',
-    'hyperg.py',
+    'hyperg',
     'utils'
 ]
