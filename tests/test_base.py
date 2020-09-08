@@ -2,7 +2,7 @@
 import numpy as np
 import scipy.sparse as sparse
 
-from hyperg.base import HyperG
+from hyperg.hyperg import HyperG
 
 
 def test_hyperg():

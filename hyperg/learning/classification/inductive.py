@@ -2,7 +2,7 @@
 import numpy as np
 import scipy.sparse as sparse
 
-from hyperg.base import HyperG, IMHL
+from hyperg.hyperg import HyperG, IMHL
 from hyperg.utils import print_log, init_label_matrix, calculate_accuracy
 
 

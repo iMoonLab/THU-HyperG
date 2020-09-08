@@ -1,6 +1,6 @@
 import numpy as np
 
-from hyperg.base import HyperG
+from hyperg.hyperg import HyperG
 from hyperg.learning.clustering import spectral_hg_partitioning
 
 

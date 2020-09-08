@@ -4,7 +4,7 @@ from sklearn.cluster.spectral import discretize
 from sklearn.utils import check_symmetric, check_random_state
 from scipy.linalg import eigh
 
-from hyperg.base import HyperG
+from hyperg.hyperg import HyperG
 
 
 def spectral_hg_partitioning(hg, n_clusters, assign_labels='kmeans', n_components=None, random_state=None, n_init=10):

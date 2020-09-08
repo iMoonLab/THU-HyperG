@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.metrics import pairwise_distances
 import scipy.sparse as sparse
 
-from hyperg.base import HyperG
+from hyperg.hyperg import HyperG
 from hyperg.utils import print_log
 
 

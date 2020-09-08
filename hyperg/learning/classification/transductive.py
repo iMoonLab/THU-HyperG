@@ -8,7 +8,7 @@ from numpy.linalg import inv
 from itertools import combinations
 from sklearn.metrics import pairwise_distances
 
-from hyperg.base import HyperG
+from hyperg.hyperg import HyperG
 from hyperg.utils import print_log, init_label_matrix, calculate_accuracy
 
 

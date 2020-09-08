@@ -3,6 +3,7 @@ from .clustering import *
 from .sparse import *
 from .grid import *
 from .fusion import *
+from .attribute import *
 
 __all__ = [
     'gen_knn_hg',
@@ -11,4 +12,5 @@ __all__ = [
     'gen_l1_hg',
     'gen_grid_neigh_hg',
     'concat_multi_hg',
+    'gen_attribute_hg'
 ]
