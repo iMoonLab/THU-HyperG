@@ -38,12 +38,14 @@ Citing
 --- 
 if you find our work useful in your research, please consider citing:
 
+```
 @article{gao2020hypergraph,
   title={Hypergraph Learning: Methods and Practices.},
   author={Gao, Y and Zhang, Z and Lin, H and Zhao, X and Du, S and Zou, C},
   journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
   year={2020}
 }
+```
 
 Contributing
 ---
