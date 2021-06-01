@@ -7,7 +7,7 @@ from hyperg.generation import gen_knn_hg, gen_grid_neigh_hg, concat_multi_hg, fu
 from hyperg.learning import trans_infer
 from hyperg.utils import iou_socre, gather_patch_ft, print_log
 
-from examples.data_helper import load_myocardium
+from data_helper import load_myocardium
 
 
 def postprocess(ary):

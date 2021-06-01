@@ -6,7 +6,7 @@ from hyperg.generation import gen_knn_hg
 from hyperg.learning import trans_infer
 from hyperg.utils import print_log
 
-from examples.data_helper import load_MSRGesture3D
+from data_helper import load_MSRGesture3D
 
 
 def main():

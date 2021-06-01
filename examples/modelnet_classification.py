@@ -6,7 +6,7 @@ from hyperg.generation import gen_knn_hg
 from hyperg.learning import multi_hg_trans_infer
 from hyperg.utils import print_log
 
-from examples.data_helper import load_modelnet
+from data_helper import load_modelnet
 
 
 def main():
